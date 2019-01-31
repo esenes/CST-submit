@@ -19,3 +19,6 @@ Solver options flags:
 --tw  Start the WAKEFIELD solver. (only in --t)
 --pic Start the Particle In Cell (PIC) solver. (only in --t)
 ```
+
+
+Based on these examples: https://cern.service-now.com/service-portal/article.do?n=KB0005870
