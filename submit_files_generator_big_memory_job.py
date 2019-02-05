@@ -1,24 +1,34 @@
+######
+# you need to be in some allowed computing group to do so !
+# possibilities:
+# - 48 cores and 500GB RAM machines
+# - 24 cores and 1TB RAM machines
+
+
 # user inputs
 jobTitle = 'prism_10mmside_50mmbehind_mesh5'                          # no extension !
 simulation_file_dir = '/eos/user/e/esenes/'     # terminate with /
 simulation_file = 'prism_20mmside_50mmbehind.cst'                   # with extension !
-num_threads = str(32)                           # ALLOWED 16 or 32 NODES=
+num_threads = 48                           # ALLOWED 48 CORES or 24
 suite_type = '-t'
 solver_type = '-tw'
 jobFlavour = 'tomorrow'
 
 # options
-bigMemoryJob = True
-needMPI = True
+needMpi = True # I leave it enabled by default
+
 
 #------------------
 # user settings
 eos_home_location = 'root://eoshome-e.cern.ch'
 user_afs_home = '/afs/cern.ch/user/e/esenes/'
+accounting_group = 'group_u_BE.u_bigmem'
 
 # options handling
+assert num_threads==48 or num_threads==24
 ## MPI
 MPI = ''
+BigMem = ''
 if needMpi:
     MPI = ' --needmpi '
 
@@ -29,7 +39,8 @@ f.write('export EOS_MGM_URL='+eos_home_location+'\n')
 f.write('\n#copy input file from EOS to local condor jobdir\n')
 f.write('eos cp '+simulation_file_dir+simulation_file+' ./'+simulation_file+'\n')
 f.write('\n#Run CST !\n')
-f.write('/afs/cern.ch/project/parc/cst2018/cst_design_environment '+suite_type+' '+solver_type+' ./'+simulation_file+' --numthreads '+num_threads+MPI+'\n')
+f.write('hostname -f> machinefile')
+f.write('/afs/cern.ch/project/parc/cst2018/cst_design_environment '+suite_type+' '+solver_type+' ./'+simulation_file+' --numthreads '+str(num_threads)+MPI+'--machinefile machinefile'+'\n')
 f.write('\n#Compress and copy back to EOS\n')
 f.write('tar -cvf '+jobTitle+'.tar ./'+simulation_file[:-4]+'\n')
 f.write('eos cp ./'+jobTitle+'.tar '+simulation_file_dir+jobTitle+'.tar\n')
@@ -39,8 +50,12 @@ f.close()
 # write the condor submission file
 f = open(jobTitle+'.sub','w')
 f.write('executable\t\t= '+jobTitle+'.sh\n')
-f.write('RequestCpus\t\t= '+num_threads+'\n')
+f.write('RequestCpus\t\t= '+str(num_threads)+'\n')
+f.write('+BigMemJob\t\t= True\n')
 f.write('+WCKey\t\t= CST\n')
+f.write('+AccountingGroup\t\t= \"'+accounting_group+'\"\n')
+if num_threads == 48: # only for 48 cores machines
+    f.write('+Requirements = OpSysAndVer =?= \"CentOS7\" \n')
 f.write('+JobFlavour\t\t= \"'+jobFlavour+'\"\n')
 f.write('environment\t\t= CST_INSTALLPATH=\"/afs/cern.ch/project/parc/cst2018\"; CST_WAIT_FOR_LICENSE=on; CST_LICENSE_SERVER=\"1705@lxlicen01\",\"1705@lxlicen02\",\"1705@lxlicen03\"; HOME=\"'+user_afs_home+'\"\n')
 file_ending = '''transfer_output_files   = \"\"
@@ -55,7 +70,4 @@ f.close()
 
 
 # toDO -->
-# 1) more general cases
-# 2) include the bigMemoryJob option
-# 3) more generalised file system --> can pull from the DFS also
 # 4) interactive UI for the terminal ???
