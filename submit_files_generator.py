@@ -8,7 +8,6 @@ solver_type = '-tw'
 jobFlavour = 'tomorrow'
 
 # options
-bigMemoryJob = True
 needMPI = True
 
 #------------------
@@ -54,8 +53,5 @@ f.close()
 
 
 
-# toDO -->
-# 1) more general cases
-# 2) include the bigMemoryJob option
 # 3) more generalised file system --> can pull from the DFS also
 # 4) interactive UI for the terminal ???
