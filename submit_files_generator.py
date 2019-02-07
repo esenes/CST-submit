@@ -1,7 +1,7 @@
 # user inputs
 jobTitle = 'prism_10mmside_50mmbehind_mesh5'                          # no extension !
 simulation_file_dir = '/eos/user/e/esenes/'     # terminate with /
-simulation_file = 'prism_20mmside_50mmbehind.cst'                   # with extension !
+simulation_file = 'prism_10mmside_50mmbehind_mesh5.cst'                   # with extension !
 num_threads = str(32)                           # ALLOWED 16 or 32 NODES=
 suite_type = '-t'
 solver_type = '-tw'
@@ -19,7 +19,7 @@ user_afs_home = '/afs/cern.ch/user/e/esenes/'
 ## MPI
 MPI = ''
 if needMpi:
-    MPI = ' --needmpi '
+    MPI = ' --withmpi '
 
 # write the script that will run on the cluster
 f = open(jobTitle+'.sh','w')

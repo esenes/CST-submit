@@ -6,9 +6,9 @@
 
 
 # user inputs
-jobTitle = 'prism_10mmside_50mmbehind_mesh5'                          # no extension !
+jobTitle = 'prism_10mmside_50B30F_halfH'              # no extension !
 simulation_file_dir = '/eos/user/e/esenes/'     # terminate with /
-simulation_file = 'prism_20mmside_50mmbehind.cst'                   # with extension !
+simulation_file = 'prism_10mmside_50B30F_halfH.cst'                   # with extension !
 num_threads = 48                           # ALLOWED 48 CORES or 24
 suite_type = '-t'
 solver_type = '-tw'
@@ -30,7 +30,7 @@ assert num_threads==48 or num_threads==24
 MPI = ''
 BigMem = ''
 if needMpi:
-    MPI = ' --needmpi '
+    MPI = ' --withmpi '
 
 # write the script that will run on the cluster
 f = open(jobTitle+'.sh','w')
@@ -39,7 +39,7 @@ f.write('export EOS_MGM_URL='+eos_home_location+'\n')
 f.write('\n#copy input file from EOS to local condor jobdir\n')
 f.write('eos cp '+simulation_file_dir+simulation_file+' ./'+simulation_file+'\n')
 f.write('\n#Run CST !\n')
-f.write('hostname -f> machinefile')
+f.write('hostname -f> machinefile\n')
 f.write('/afs/cern.ch/project/parc/cst2018/cst_design_environment '+suite_type+' '+solver_type+' ./'+simulation_file+' --numthreads '+str(num_threads)+MPI+'--machinefile machinefile'+'\n')
 f.write('\n#Compress and copy back to EOS\n')
 f.write('tar -cvf '+jobTitle+'.tar ./'+simulation_file[:-4]+'\n')
