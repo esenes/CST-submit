@@ -30,7 +30,7 @@ f.write('eos cp '+simulation_file_dir+simulation_file+' ./'+simulation_file+'\n'
 f.write('\n#Run CST !\n')
 f.write('/afs/cern.ch/project/parc/cst2018/cst_design_environment '+suite_type+' '+solver_type+' ./'+simulation_file+' --numthreads '+num_threads+MPI+'\n')
 f.write('\n#Compress and copy back to EOS\n')
-f.write('tar -cvf '+jobTitle+'.tar ./'+simulation_file[:-4]+'\n')
+f.write('tar -cvf '+jobTitle+'.tar ./'+simulation_file[:-4]+' ./'+simulation_file+'\n')
 f.write('eos cp ./'+jobTitle+'.tar '+simulation_file_dir+jobTitle+'.tar\n')
 f.write('\nexit 0\n')
 f.close()
