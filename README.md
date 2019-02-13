@@ -19,6 +19,11 @@ Solver options flags:
 --tw  Start the WAKEFIELD solver. (only in --t)
 --pic Start the Particle In Cell (PIC) solver. (only in --t)
 ```
+
+Example:
+- Run Wakefield simulation with parametric sweep `-t -p`. Note that even if you set up the simulation but then run `-t -tw` it will just run with the current parametres.
+
+
 Possible job flavours:
 ```
 espresso     = 20 minutes
@@ -40,5 +45,5 @@ In big memory jobs one can access 2 kinds of machines: 48 cores and 500GB of RAM
 
 
 
-Based on these examples: https://cern.service-now.com/service-portal/article.do?n=KB0005870 and 
-http://batchdocs.web.cern.ch/batchdocs/local/submit.html 
+Based on these examples: https://cern.service-now.com/service-portal/article.do?n=KB0005870 and
+http://batchdocs.web.cern.ch/batchdocs/local/submit.html
