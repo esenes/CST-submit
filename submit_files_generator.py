@@ -8,7 +8,7 @@ solver_type = '-tw'
 jobFlavour = 'tomorrow'
 
 # options
-needMPI = True
+needMPI = False
 
 #------------------
 # user settings

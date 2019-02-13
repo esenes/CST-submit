@@ -15,7 +15,7 @@ solver_type = '-tw'
 jobFlavour = 'tomorrow'
 
 # options
-needMpi = True # I leave it enabled by default
+needMpi = False # just for BIG number of cells (>billion)
 
 
 #------------------
@@ -28,7 +28,6 @@ accounting_group = 'group_u_BE.u_bigmem'
 assert num_threads==48 or num_threads==24
 ## MPI
 MPI = ''
-BigMem = ''
 if needMpi:
     MPI = ' --withmpi '
 
