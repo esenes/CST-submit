@@ -44,6 +44,6 @@ In big memory jobs one can access 2 kinds of machines: 48 cores and 500GB of RAM
 
 
 
-
-Based on these examples: https://cern.service-now.com/service-portal/article.do?n=KB0005870 and
-http://batchdocs.web.cern.ch/batchdocs/local/submit.html
+Resources and base examples: 
+- https://cern.service-now.com/service-portal/article.do?n=KB0005870 and
+- http://batchdocs.web.cern.ch/batchdocs/local/submit.html
