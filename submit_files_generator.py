@@ -40,6 +40,7 @@ f = open(jobTitle+'.sub','w')
 f.write('executable\t\t= '+jobTitle+'.sh\n')
 f.write('RequestCpus\t\t= '+num_threads+'\n')
 f.write('+WCKey\t\t= CST\n')
+f.write('notification\t\t= Always\n')
 f.write('+JobFlavour\t\t= \"'+jobFlavour+'\"\n')
 f.write('environment\t\t= CST_INSTALLPATH=\"/afs/cern.ch/project/parc/cst2018\"; CST_WAIT_FOR_LICENSE=on; CST_LICENSE_SERVER=\"1705@lxlicen01\",\"1705@lxlicen02\",\"1705@lxlicen03\"; HOME=\"'+user_afs_home+'\"\n')
 file_ending = '''transfer_output_files   = \"\"
