@@ -52,6 +52,7 @@ f.write('executable\t\t= '+jobTitle+'.sh\n')
 f.write('RequestCpus\t\t= '+str(num_threads)+'\n')
 f.write('+BigMemJob\t\t= True\n')
 f.write('+WCKey\t\t= CST\n')
+f.write('notification\t\t= Always\n')
 f.write('+AccountingGroup\t\t= \"'+accounting_group+'\"\n')
 if num_threads == 48: # only for 48 cores machines
     f.write('+Requirements = OpSysAndVer =?= \"CentOS7\" \n')
